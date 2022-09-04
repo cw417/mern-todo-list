@@ -1,24 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TodoInput from "./todoInput";
+import Todo from "./todo";
 
-const Todo = (props) => (
-  <tr>
-    <td>{props.todo.todo}</td>
-    <td>{props.todo.completed}</td>
-    <td>
-      <Link className="btn btn-link" to={`/edit/${props.todo._id}`}>Edit</Link> |
-      <button className="btn btn-link"
-        onClick={() => {
-          props.deleteTodo(props.todo._id);
-        }}
-      >
-        Delete
-      </button>
-    </td>
-  </tr>
-);
- 
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
 
@@ -42,24 +26,42 @@ export default function TodoList() {
     return;
   }, [todos.length]);
 
+  async function addTodo(todo) {
+    // When a post request is sent to the create url, we'll add a new record to the database.
+    const newTodo = { todo: todo, completed: false };
+
+    await fetch("http://localhost:5000/todo/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTodo),
+    })
+    .catch(error => {
+      window.alert(error);
+      return;
+    });
+    const newTodos = [...todos, newTodo]
+    setTodos(newTodos)
+  }
+
   // This method will delete a record
   async function deleteTodo(id) {
     await fetch(`http://localhost:5000/${id}`, {
       method: "DELETE"
     });
-
     const newRecords = todos.filter((el) => el._id !== id);
     setTodos(newRecords);
   }
 
   // This method will map out the records on the table
   function todoList() {
-    return todos.map((todo) => {
+    return todos.map((todo, index) => {
       return (
         <Todo
           todo={todo}
           deleteTodo={() => deleteTodo(todo._id)}
-          key={todo._id}
+          key={index}
         />
       );
     });
@@ -67,18 +69,10 @@ export default function TodoList() {
 
   // This following section will display the table with the records of individuals.
   return (
-    <div>
+    <div className="container--todoList">
       <h3>Todo List</h3>
-      <TodoInput />
-      <table className="table table-striped" style={{ marginTop: 20 }}>
-        <thead>
-          <tr>
-            <th>Todo</th>
-            <th>Completed</th>
-          </tr>
-        </thead>
-        <tbody>{todoList()}</tbody>
-      </table>
-    </div>
+      <TodoInput addTodo={addTodo} />
+      <div className="todo-list">{todoList()}</div>
+    </div>  
   );
 }
