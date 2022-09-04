@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import { useNavigate } from "react-router";
+import React, { useRef } from 'react';
+import { useNavigate } from 'react-router';
+import { FiPlus } from 'react-icons/fi';
 
 export default function TodoInput({ addTodo }) {
 
@@ -13,15 +14,13 @@ export default function TodoInput({ addTodo }) {
   }
 
   return (
-    <div>
-      <div>
-        <form onSubmit={onSubmit}>
-          <span>
-            <input ref={todoInfo} type='text' placeholder='Todo'/>
-            <button type='submit'>Add</button>
-          </span>
-        </form>
-      </div>
+    <div className='my-4'>
+      <form onSubmit={onSubmit}>
+        <span className='flex'>
+          <input className='rounded-2xl px-4 py-2' ref={todoInfo} type='text' placeholder='Todo'/>
+          <button className='btn' type='submit'><FiPlus /></button>
+        </span>
+      </form>
     </div>
   )
 }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import TodoInput from "./todoInput";
-import Todo from "./todo";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import TodoInput from './todoInput';
+import Todo from './todo';
 
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -30,10 +30,10 @@ export default function TodoList() {
     // When a post request is sent to the create url, we'll add a new record to the database.
     const newTodo = { todo: todo, completed: false };
 
-    await fetch("http://localhost:5000/todo/add", {
-      method: "POST",
+    await fetch('http://localhost:5000/todo/add', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(newTodo),
     })
@@ -48,7 +48,7 @@ export default function TodoList() {
   // This method will delete a record
   async function deleteTodo(id) {
     await fetch(`http://localhost:5000/${id}`, {
-      method: "DELETE"
+      method: 'DELETE'
     });
     const newRecords = todos.filter((el) => el._id !== id);
     setTodos(newRecords);
@@ -69,10 +69,10 @@ export default function TodoList() {
 
   // This following section will display the table with the records of individuals.
   return (
-    <div className="container--todoList">
-      <h3>Todo List</h3>
+    <div className='flex flex-col items-center'>
+      <div className='text-2xl font-bold'>Todo List</div>
       <TodoInput addTodo={addTodo} />
-      <div className="todo-list">{todoList()}</div>
+      <div>{todoList()}</div>
     </div>  
   );
 }

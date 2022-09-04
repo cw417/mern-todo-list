@@ -1,13 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body, html {
   background-color: grey;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.container--todoList {
-  display: flex;
-  flex-direction: column;
-}
-
-.todo-list {
-  display: flex;
-  flex-direction: column;
+.btn {
+  @apply bg-blue-500 hover:bg-blue-400 text-white font-bold mx-2 my-1 py-2 px-4 rounded;
 }

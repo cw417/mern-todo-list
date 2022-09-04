@@ -1,17 +1,18 @@
 import React from 'react'
+import { FiTrash } from 'react-icons/fi'
 
 export default function Todo(props) {
   return (
-    <div>
+    <div className=''>
       <span>{props.todo.todo}</span>
-      <span> {props.todo.completed?"yes":"no"}</span>
+      <span> {props.todo.completed?'yes':'no'}</span>
       <span>
-        <button className="btn btn-link"
+        <button className='btn'
           onClick={() => {
             props.deleteTodo(props.todo._id);
           }}
         >
-          Delete
+          <FiTrash />
         </button>
       </span>
     </div>
