@@ -41,7 +41,7 @@ todoRoutes.route("/todo/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     todo: req.body.todo,
-    completed: req.body.completed
+    completed: false
   };
   db_connect.collection("todos").insertOne(myobj, function (err, res) {
     if (err) throw err;

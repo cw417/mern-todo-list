@@ -9,5 +9,9 @@ Todo list app created while learning MERN stack
   - "record" --> todo
   - "records" --> todos
   - DONE:
-    - server.js
-    - conn.js
+    - Backend
+      - server/server.js
+      - server/db/conn.js
+      - server/routes/todo.js
+    - Frontend
+      client/src/components/todoList.js
