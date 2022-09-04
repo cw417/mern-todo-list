@@ -49,25 +49,6 @@ todoRoutes.route("/todo/add").post(function (req, response) {
   });
 });
  
-// This section will help you update a todo by id.
-todoRoutes.route("/update/:id").post(function (req, response) {
-  let db_connect = dbo.getDb();
-  let myquery = { _id: ObjectId(req.params.id) };
-  let newvalues = {
-    $set: {
-     todo: req.body.todo,
-     completed: req.body.completed
-    },
-  };
-  db_connect
-    .collection("todos")
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
-      console.log("1 document updated");
-      response.json(res);
-    });
-});
- 
 // This section will help you delete a todo
 todoRoutes.route("/:id").delete((req, response) => {
   let db_connect = dbo.getDb();
