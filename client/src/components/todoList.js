@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
- 
+import TodoInput from "./todoInput";
+
 const Todo = (props) => (
   <tr>
-    <td>{props.todo.name}</td>
-    <td>{props.todo.position}</td>
-    <td>{props.todo.level}</td>
+    <td>{props.todo.todo}</td>
+    <td>{props.todo.completed}</td>
     <td>
       <Link className="btn btn-link" to={`/edit/${props.todo._id}`}>Edit</Link> |
       <button className="btn btn-link"
@@ -69,6 +69,7 @@ export default function TodoList() {
   return (
     <div>
       <h3>Todo List</h3>
+      <TodoInput />
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>
           <tr>
